@@ -1,0 +1,12 @@
+resources:
+- name: firewall ##name of resource
+  type: compute.beta.firewall ##instance type
+  properties:
+    name: firewall
+    description: prevents access to sqlserver 
+    targetTags: ##which other instance is this attatched to
+    - "sqlserver"
+    allowed: ##which ports can be accessed
+    - IPProtocol: udp
+      ports:
+        - "22" ##the port for SSH access

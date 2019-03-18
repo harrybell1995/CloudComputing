@@ -1,0 +1,11 @@
+resources:
+- name: sqlservershopapp ##name of instance
+  type: sqladmin.v1beta4.instance ##type of instance
+  properties:
+    region: europe-west2 ##location that this will be run from
+    backendType: SECOND_GEN ##PostgreSQL instance
+    instanceType: CLOUD_SQL_INSTANCE
+    databaseVersion: POSTGRES_9_6 ##open source sql instance
+    settings:
+      tier: db-f1-micro ##lowest cost hardware
+      dataDiskSizeGb: 15 ##the size of the disk needed

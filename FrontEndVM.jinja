@@ -1,0 +1,18 @@
+resources:
+- name: frontend ##this vm is used to run requests that the app has requested
+  type: compute.v1.instance
+  properties:
+    zone: europe-west2-b ##hosted in london
+    machineType: https://www.googleapis.com/compute/v1/projects/cmp3747m-bell-14475574/zones/europe-west2-b/machineTypes/f1-micro
+    disks:
+    - deviceName: boot
+      type: PERSISTENT ##can be up to 64tb, scalable and always there
+      boot: true ##this is the drive that is used to boot the vm
+      autoDelete: true ##if the instance is deleted, delete the disk too
+      initializeParams:
+        sourceImage: projects/debian-cloud/global/images/family/debian-9 ##debian 9 is a free open source OS, this vm doesnt need anything else
+    networkInterfaces: ##the vm needs to be connected to the internet
+    - network: https://www.googleapis.com/compute/v1/projects/cmp3747m-bell-14475574/global/networks/default
+      accessConfigs:
+      - name: External_NAT ##nat give private networks to devices with unregistered ip addresses
+        type: ONE_TO_ONE_NAT ##mirrors the ip address of external address
